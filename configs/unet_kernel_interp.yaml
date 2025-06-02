@@ -1,0 +1,67 @@
+ns: &DEFAULT
+
+  #General
+  # For computing compression
+  n_params_baseline: None #If None, will be computed
+  verbose: True
+  arch: 'unet_kernel_interp'
+
+  #Distributed computing
+  distributed:
+    use_distributed: False
+    wireup_info: 'mpi'
+    wireup_store: 'tcp'
+    model_parallel_size: 2
+    seed: 666
+
+  # Model hyperparameters
+  unet_kernel_interp:
+    base_res: 128
+    interpolation_mode: 'bilinear'
+    hidden_channels: 19
+    ch_mults: [1, 2, 2, 3]
+    is_attn: [False, False, False, False]
+    kernel_size: 9
+    num_groups: 1
+    positional_embedding: 'grid'
+
+  # Optimizer
+  opt:
+    n_epochs: 301
+    learning_rate: 5e-4
+    weight_decay: 1e-4
+    amp_autocast: False
+    callbacks: None
+
+    scheduler_T_max: 500 # For cosine only, typically take n_epochs
+    scheduler_patience: 5 # For ReduceLROnPlateau only
+    scheduler: 'StepLR' # Or 'CosineAnnealingLR' OR 'ReduceLROnPlateau'
+    step_size: 50
+    gamma: 0.5
+
+  # Data
+  data:
+    folder: /home/miguel/data/navier_stokes
+    batch_size: 16
+    n_train: 10000
+    train_resolution: 128
+    n_tests: [2000, 2000, 1000, 1000, 1000]
+    test_resolutions: [64, 128, 256, 512, 1024] 
+    test_batch_sizes: [32, 16, 8, 4, 1]
+
+    encode_input: True
+    encode_output: False
+    num_workers: 0
+    pin_memory: False
+    persistent_workers: False
+
+  # Weights and biases
+  wandb:
+    log: False
+    name: None # If None, config will be used but you can override it here
+    group: '' 
+    project: ""
+    entity: "" # put your username here
+    sweep: False
+    log_output: False
+    log_test_interval: 1
