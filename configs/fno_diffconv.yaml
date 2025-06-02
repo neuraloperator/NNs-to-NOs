@@ -71,7 +71,7 @@ ns: &DEFAULT
 
   # Data
   data:
-    folder: /home/miguel/data/navier_stokes
+    folder: /path/to/data/navier_stokes
     batch_size: 16
     n_train: 10000
     train_resolution: 128

@@ -27,7 +27,7 @@ ns: &DEFAULT
 
   # Optimizer
   opt:
-    n_epochs: 301
+    n_epochs: 101
     learning_rate: 5e-4
     weight_decay: 1e-4
     amp_autocast: False
@@ -36,15 +36,15 @@ ns: &DEFAULT
     scheduler_T_max: 500 # For cosine only, typically take n_epochs
     scheduler_patience: 5 # For ReduceLROnPlateau only
     scheduler: 'StepLR' # Or 'CosineAnnealingLR' OR 'ReduceLROnPlateau'
-    step_size: 50
+    step_size: 20
     gamma: 0.5
 
   # Data
   data:
     folder: /path/to/data/navier_stokes
-    batch_size: 16
-    n_train: 10000
-    train_resolution: 128
+    n_trains: [10000, 10000, 10000]
+    train_resolutions: [64, 128, 256]
+    train_batch_sizes: [32, 16, 8]
     n_tests: [2000, 2000, 1000, 1000, 1000]
     test_resolutions: [64, 128, 256, 512, 1024] 
     test_batch_sizes: [32, 16, 8, 4, 1]
