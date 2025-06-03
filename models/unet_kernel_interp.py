@@ -157,59 +157,52 @@ class UNetWithScale(Unet):
         self.scale_dict["scale"] = x.shape[-1] / self.base_res
         return self._forward(x)
 
+
 def UNet_kernel_interpolate(model, interpolation='bilinear', device=torch.device('cuda')):
     """
-    Takes existing `model` from PDE Arena U-Net and replaces all Conv2d layers with Conv2d layers that
-    are adaptive to the input size.
+    Takes existing convolutional neural network `model` replaces all Conv2d layers with Conv2d layers that
+    are adaptive to the input size. Similarly replaces ConvTranspose2d with InOutInterpolateConvTranspose2d.
     """
     scale_dict = model.scale_dict
     new_model = copy.deepcopy(model)
     new_model.scale_dict = scale_dict
 
-    def interp_conv2d(name, module, parent):
-        if isinstance(module, nn.Conv2d):
-            # New conv layer with interpolated kernels
-            new_conv = InterpConv2d(scale_dict, module.in_channels, module.out_channels,
-                                module.kernel_size, module.stride,
-                                module.padding, module.dilation,
-                                module.groups, bias=(module.bias is not None),
-                                interpolation_mode=interpolation)
-            
-            # Set the new weight and bias
-            new_conv.weight.data.copy_(module.weight.data)
-            if module.bias is not None:
-                new_conv.bias.data.copy_(module.bias.data)
+    def recursively_replace(module):
+        for name, child in module.named_children():
+            if isinstance(child, nn.Conv2d):
+                # New conv layer with interpolated kernels
+                new_conv = InterpConv2d(scale_dict, child.in_channels, child.out_channels,
+                                    child.kernel_size, child.stride,
+                                    child.padding, child.dilation,
+                                    child.groups, bias=(child.bias is not None),
+                                    interpolation_mode=interpolation)
+                
+                # Set the new weight and bias
+                new_conv.weight.data.copy_(child.weight.data)
+                if child.bias is not None:
+                    new_conv.bias.data.copy_(child.bias.data)
 
-            new_conv.to(device)
-            setattr(parent, name, new_conv)
+                new_conv.to(device)
+                setattr(module, name, new_conv)
 
-    def interp_convtranspose2d(name, module, parent):
-        if isinstance(module, nn.ConvTranspose2d):
-            new_conv = InOutInterpolateConvTranspose2d(scale_dict, module.in_channels, module.out_channels,
-                                            module.kernel_size, module.stride, module.padding,
-                                            module.output_padding, module.groups, bias=(module.bias is not None),
-                                            dilation=module.dilation, interpolation_mode=interpolation)
-            
-            # Set the new weight and bias
-            new_conv.weight.data.copy_(module.weight.data)
-            if module.bias is not None:
-                new_conv.bias.data.copy_(module.bias.data)
+            if isinstance(child, nn.ConvTranspose2d):
+                new_conv = InOutInterpolateConvTranspose2d(scale_dict, child.in_channels, child.out_channels,
+                                                child.kernel_size, child.stride, child.padding,
+                                                child.output_padding, child.groups, bias=(child.bias is not None),
+                                                dilation=child.dilation, interpolation_mode=interpolation)
+                
+                # Set the new weight and bias
+                new_conv.weight.data.copy_(child.weight.data)
+                if child.bias is not None:
+                    new_conv.bias.data.copy_(child.bias.data)
 
-            new_conv.to(device)
-            setattr(parent, name, new_conv)
+                new_conv.to(device)
+                setattr(module, name, new_conv)
 
-    # Unravel tree of child modules in PDE Arena UNet to find the Conv2d's
-    for name1, m1 in new_model.named_children():
-        interp_conv2d(name1, m1, new_model)
-        interp_convtranspose2d(name1, m1, new_model)
-        for name2, m2 in m1.named_children():
-            interp_conv2d(name2, m2, m1)
-            interp_convtranspose2d(name2, m2, m1)
-            for name3, m3 in m2.named_children():
-                interp_conv2d(name3, m3, m2)
-                interp_convtranspose2d(name3, m3, m2)
-                for name, module in m3.named_children():
-                    interp_conv2d(name, module, m3)
-                    interp_convtranspose2d(name, module, m3)
+            else:
+                recursively_replace(child)
+
+        return module
     
-    return new_model
+    
+    return recursively_replace(new_model)
