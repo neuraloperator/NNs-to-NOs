@@ -17,4 +17,4 @@ where `[name of weights file]` is the name of the model's pretrained weights in 
 
 
 # Requirements
-This repo requires an installation of the [Neural Operator library](https://github.com/neuraloperator/neuraloperator/) (code verified as of 28 May, 2025) and [HuggingFace Transformers](https://github.com/huggingface/transformers), as well as both of their dependencies.
+This repo requires an installation of the [Neural Operator library](https://github.com/neuraloperator/neuraloperator/) (verified on [this commit](https://github.com/neuraloperator/neuraloperator/tree/d8c9b30fd72359e60a13397b72e92ca13b66a453) from 28 May, 2025) and [HuggingFace Transformers](https://github.com/huggingface/transformers), as well as both of their dependencies.
