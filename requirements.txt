@@ -1,0 +1,6 @@
+torch
+numpy
+transformers
+configmypy
+wandb
+git+https://github.com/neuraloperator/neuraloperator.git@d8c9b30#egg=neuralop
