@@ -18,3 +18,14 @@ where `[name of weights file]` is the name of the model's pretrained weights in 
 
 # Requirements
 This repo requires an installation of the [Neural Operator library](https://github.com/neuraloperator/neuraloperator/) (verified on [this commit](https://github.com/neuraloperator/neuraloperator/tree/d8c9b30fd72359e60a13397b72e92ca13b66a453) from 28 May, 2025) and [HuggingFace Transformers](https://github.com/huggingface/transformers), as well as both of their dependencies.
+
+# Citation
+If you used our code in an academic publication, please cite the following:
+```
+@article{berner2025principled,
+  title={Principled Approaches for Extending Neural Architectures to Function Spaces for Operator Learning},
+  author={Berner, Julius and Liu-Schiaffini, Miguel and Kossaifi, Jean and Duruisseaux, Valentin and Bonev, Boris and Azizzadenesheli, Kamyar and Anandkumar, Anima},
+  journal={arXiv preprint arXiv:2506.10973},
+  year={2025}
+}
+```
