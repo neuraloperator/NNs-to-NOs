@@ -2,6 +2,8 @@
 
 # Principled Approaches for Extending Neural Architectures to Function Spaces for Operator Learning
 
+![intro](https://github.com/user-attachments/assets/cc067d12-c37e-48aa-a54c-c2101762a831)
+
 This repo contains the code to reproduce the experiments from the paper ["Principled Approaches for Extending Neural Architectures to Function Spaces for Operator Learning."](https://arxiv.org/abs/2506.10973)
 
 ## Usage 
