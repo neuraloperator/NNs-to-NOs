@@ -1,6 +1,10 @@
-This repo contains the code to reproduce the experiments from the paper "Principled approaches for extending neural architectures to function spaces for operator learning." The experiments in this paper focus on the Navier-Stokes equations, and the dataset we used can be [downloaded from Zenodo](https://zenodo.org/records/12825163).
+[![arXiv](https://img.shields.io/badge/arXiv-2506.10973-b31b1b.svg?style=flat-square&logo=arxiv)](https://arxiv.org/abs/2506.10973)
 
-# Usage 
+# Principled Approaches for Extending Neural Architectures to Function Spaces for Operator Learning
+
+This repo contains the code to reproduce the experiments from the paper ["Principled Approaches for Extending Neural Architectures to Function Spaces for Operator Learning."](https://arxiv.org/abs/2506.10973)
+
+## Usage 
 The configurations for our runs, including all hyperparameters, can be found in `configs/`. Models that are not in the Neural Operator library can be found in `models/`. There are three modes that we consider in this paper: single-resolution training, multi-resolution training, and input-output interpolation.
 
 For single resolution or multi-resolution training, run `train_single_res.py` and `train_multi_res.py` (respectively) as
@@ -16,10 +20,10 @@ python evaluate_input_output_interpolation.py [name of weights file] [config nam
 where `[name of weights file]` is the name of the model's pretrained weights in the directory `ckpts/`, and `[interpolation mode]` is one of `'fourier'` or `'bilinear'`.
 
 
-# Requirements
-This repo requires an installation of the [Neural Operator library](https://github.com/neuraloperator/neuraloperator/) (verified on [this commit](https://github.com/neuraloperator/neuraloperator/tree/d8c9b30fd72359e60a13397b72e92ca13b66a453) from 28 May, 2025) and [HuggingFace Transformers](https://github.com/huggingface/transformers), as well as both of their dependencies.
+## Requirements
+This repo requires an installation of the [Neural Operator library](https://github.com/neuraloperator/neuraloperator/) (verified on [this commit](https://github.com/neuraloperator/neuraloperator/tree/d8c9b30fd72359e60a13397b72e92ca13b66a453) from 28 May, 2025) and [HuggingFace Transformers](https://github.com/huggingface/transformers), as well as both of their dependencies. The experiments in this paper focus on the Navier-Stokes equations, and the dataset we used can be [downloaded from Zenodo](https://zenodo.org/records/12825163).
 
-# Citation
+## Citation
 If you used our code in an academic publication, please cite the following:
 ```
 @article{berner2025principled,
