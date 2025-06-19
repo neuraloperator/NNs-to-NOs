@@ -41,7 +41,7 @@ ns: &DEFAULT
 
   # Data
   data:
-    folder: /path/to/data/navier_stokes
+    folder: ./data/
     n_trains: [10000, 10000, 10000]
     train_resolutions: [64, 128, 256]
     train_batch_sizes: [32, 16, 8]
