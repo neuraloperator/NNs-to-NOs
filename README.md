@@ -23,7 +23,7 @@ where `[name of weights file]` is the name of the model's pretrained weights in 
 
 
 ## Requirements
-This repo requires an installation of the [Neural Operator library](https://github.com/neuraloperator/neuraloperator/) (verified on [this commit](https://github.com/neuraloperator/neuraloperator/tree/d8c9b30fd72359e60a13397b72e92ca13b66a453) from 28 May, 2025) and [HuggingFace Transformers](https://github.com/huggingface/transformers), as well as both of their dependencies. The experiments in this paper focus on the Navier-Stokes equations, and the dataset we used can be [downloaded from Zenodo](https://zenodo.org/records/12825163).
+This repo requires an installation of the [Neural Operator library](https://github.com/neuraloperator/neuraloperator/) (verified on [this commit](https://github.com/neuraloperator/neuraloperator/tree/d8c9b30fd72359e60a13397b72e92ca13b66a453) from 28 May, 2025) and [HuggingFace Transformers](https://github.com/huggingface/transformers), as well as both of their dependencies. The experiments in this paper focus on the Navier-Stokes equations, and the dataset we used can be [downloaded from Zenodo](https://zenodo.org/records/15687518).
 
 ## Citation
 If you used our code in an academic publication, please cite the following:
