@@ -4,7 +4,7 @@
 
 ![intro](https://github.com/user-attachments/assets/cc067d12-c37e-48aa-a54c-c2101762a831)
 
-This repo contains the code to reproduce the experiments from the paper ["Principled Approaches for Extending Neural Architectures to Function Spaces for Operator Learning."](https://arxiv.org/abs/2506.10973) All code and setup has been verified on a RTX 4090 system with CUDA 12.4 running Ubuntu 22.04.
+This repo contains the code to reproduce the experiments from the paper ["Principled Approaches for Extending Neural Architectures to Function Spaces for Operator Learning."](https://arxiv.org/abs/2506.10973) All code and setup has been verified on a RTX 4090 system with CUDA 12.4 running Ubuntu 22.04. OFormer experiments were run on a single H100 GPU.
 
 ## Setup Instructions
 First, we need to install the dependencies for this repo. Our code requires an installation of the [Neural Operator library](https://github.com/neuraloperator/neuraloperator/) (verified on [this commit](https://github.com/neuraloperator/neuraloperator/tree/d8c9b30fd72359e60a13397b72e92ca13b66a453) from 28 May, 2025) and [HuggingFace Transformers](https://github.com/huggingface/transformers), as well as both of their respective dependencies. Installation should take a few minutes on most modern systems.
