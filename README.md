@@ -15,6 +15,8 @@ python download_data.py
 ```
 will create the folder `./data/` and download the data into the folder.
 
+To ensure everything is set up correctly, we recommend you perform a demo training run by downloading `nsforcing_128_train.pt` and `nsforcing_128_test.pt` from Zenodo and training the single-resolution models (see below) on the 128x128 data, which should take a few hours on most modern GPU systems. The results should be close to those in Figure 5 of the paper.
+
 ## Usage 
 The configurations for our runs, including all hyperparameters, can be found in `configs/`. Models that are not in the Neural Operator library can be found in `models/`. There are three modes that we consider in this paper: single-resolution training, multi-resolution training, and input-output interpolation.
 
